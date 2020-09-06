@@ -1,0 +1,54 @@
+@import "./variables";
+
+$primary-color: #ffe600;
+
+$secondary-color: #3483fa;
+
+$terciary-1: #333;
+$terciary-2: #666;
+$terciary-3: #999;
+$terciary-4: #eee;
+
+$error: #962501;
+
+$light-color: rgba($black, 0.45);
+/* ----------- Colors ------------- */
+$colors: (
+  white: $white,
+  black: $black,
+  primary-color: $primary-color,
+  secondary-color: $secondary-color,
+  terciary-1: $terciary-1,
+  terciary-2: $terciary-2,
+  terciary-3: $terciary-3,
+  terciary-4: $terciary-4,
+  error: $error,
+);
+
+@mixin gen-props($prefix, $property) {
+  @each $color-name, $color in $colors {
+    .#{$prefix}-#{$color-name} {
+      #{$property}: $color !important;
+    }
+  }
+}
+
+@include gen-props("text", "color");
+@include gen-props("bg", "background");
+@include gen-props("border", "border-color");
+
+/* ----------- Typographies ------------- */
+$fonts: (
+  regular: $regular,
+  bold: $bold,
+);
+
+@mixin gen-props($prefix, $property) {
+  @each $font-name, $font in $fonts {
+    .#{$prefix}-#{$font-name} {
+      #{$property}: $font !important;
+    }
+  }
+}
+
+@include gen-props("f-weight", "font-weight");
