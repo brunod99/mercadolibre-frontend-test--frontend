@@ -1,0 +1,8 @@
+{
+  "Rem calculator": {
+    "scope": "scss",
+    "prefix": "rem",
+    "body": ["rem($1)"],
+    "description": "Calculate pixels to rem's. You can add 'px' or not to argument."
+  }
+}
