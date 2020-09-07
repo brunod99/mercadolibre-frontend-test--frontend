@@ -1,10 +1,35 @@
 import React from "react";
+import { History } from "history";
 import MagnifyGlass from "../../assets/img/ic_Search.png";
 import MagnifyGlass2x from "../../assets/img/ic_Search@2x.png";
 import Logo from "../../assets/img/Logo_ML.png";
 import Logo2x from "../../assets/img/Logo_ML@2x.png";
+import CONSTANTS from "../../constants";
+import useForm from "../../hooks/useForm";
+import validateSearch from "../../validations/validateSearch";
 
-const Header: React.FC = () => {
+interface ChildComponentProps {
+  history: History;
+}
+
+const Header: React.FC<ChildComponentProps> = ({ history }) => {
+  // Constants
+  const { HEADER_FORM_INITIAL_STATE } = CONSTANTS;
+
+  // Handlers
+  const handleSuccess = () => {
+    history.push("/items");
+  };
+
+  // Hooks
+  const { values, errors, handleFieldEvents, handleSubmit } = useForm(
+    HEADER_FORM_INITIAL_STATE,
+    validateSearch,
+    handleSuccess
+  );
+
+  const { search } = values;
+
   return (
     <header className="header bg-primary">
       <div className="container d-flex">
@@ -14,8 +39,19 @@ const Header: React.FC = () => {
         </div>
         <div className="header__search-bar w-100">
           {/* Form */}
-          <form action="" className="header__form d-flex h-100">
-            <input type="text" placeholder="Nunca dejes de buscar" />
+          <form
+            action=""
+            className="header__form d-flex h-100"
+            onSubmit={handleSubmit}
+          >
+            <input
+              type="text"
+              name="search"
+              placeholder="Nunca dejes de buscar"
+              onBlur={handleFieldEvents}
+              onChange={handleFieldEvents}
+              value={search}
+            />
             <button
               type="submit"
               className="header__form-button d-flex align-items-center justify-content-center"
@@ -27,6 +63,7 @@ const Header: React.FC = () => {
               />
             </button>
           </form>
+          {errors["search"] && <p className="text-error">{errors["search"]}</p>}
         </div>
       </div>
     </header>
