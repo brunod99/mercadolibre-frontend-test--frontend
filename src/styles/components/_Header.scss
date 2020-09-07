@@ -1,0 +1,23 @@
+.header {
+  padding: rem(10);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+
+  // Logo
+  .header__img {
+    width: $col;
+  }
+
+  // Form
+  .header__form {
+    .header__form-button {
+      padding: rem(9);
+      background-color: $terciary-4;
+      border-radius: 0 rem(5) rem(5) 0;
+      width: $col / 2;
+    }
+  }
+}

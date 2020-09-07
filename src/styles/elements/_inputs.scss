@@ -4,5 +4,8 @@ input,
   line-height: 1;
   background-color: $white;
   padding: rem(5);
+  padding-left: rem(15);
   color: $light-color;
+  width: 100%;
+  border-radius: rem(5) 0 0 rem(5);
 }

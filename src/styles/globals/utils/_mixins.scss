@@ -1,23 +1,11 @@
 @import "./variables";
 
-$primary-color: #ffe600;
-
-$secondary-color: #3483fa;
-
-$terciary-1: #333;
-$terciary-2: #666;
-$terciary-3: #999;
-$terciary-4: #eee;
-
-$error: #962501;
-
-$light-color: rgba($black, 0.45);
 /* ----------- Colors ------------- */
 $colors: (
   white: $white,
   black: $black,
-  primary-color: $primary-color,
-  secondary-color: $secondary-color,
+  primary: $primary-color,
+  secondary: $secondary-color,
   terciary-1: $terciary-1,
   terciary-2: $terciary-2,
   terciary-3: $terciary-3,
