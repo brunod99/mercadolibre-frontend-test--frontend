@@ -1,6 +1,4 @@
-import { HeaderSearchType } from "../Pages";
-
-export type HookUseSearchState = HeaderSearchType;
+export type HookUseSearchState = { [key: string]: string };
 type HookUseSearchErrorType = Partial<HookUseSearchState>;
 
 export type HookUseSearchValidationType = (
