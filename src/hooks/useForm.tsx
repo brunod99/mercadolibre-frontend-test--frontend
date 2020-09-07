@@ -32,8 +32,6 @@ const useForm: HookUseSearchType = (initialState, validations, fn) => {
       ...values,
       [e.currentTarget.name]: e.currentTarget.value,
     });
-
-    setErrors(validations(values));
   };
 
   return {
