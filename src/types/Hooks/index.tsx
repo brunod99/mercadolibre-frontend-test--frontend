@@ -1,7 +1,7 @@
 import { HeaderSearchType } from "../Pages";
 
 export type HookUseSearchState = HeaderSearchType;
-type HookUseSearchErrorType = HookUseSearchState | {};
+type HookUseSearchErrorType = Partial<HookUseSearchState>;
 
 export type HookUseSearchValidationType = (
   values: HookUseSearchState

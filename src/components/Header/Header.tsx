@@ -44,14 +44,19 @@ const Header: React.FC<ChildComponentProps> = ({ history }) => {
             className="header__form d-flex h-100"
             onSubmit={handleSubmit}
           >
-            <input
-              type="text"
-              name="search"
-              placeholder="Nunca dejes de buscar"
-              onBlur={handleFieldEvents}
-              onChange={handleFieldEvents}
-              value={search}
-            />
+            <div className="header__input-group">
+              <input
+                type="text"
+                name="search"
+                placeholder="Nunca dejes de buscar"
+                onBlur={handleFieldEvents}
+                onChange={handleFieldEvents}
+                value={search}
+              />
+              {errors["search"] && (
+                <p className="text-error">{errors["search"]}</p>
+              )}
+            </div>
             <button
               type="submit"
               className="header__form-button d-flex align-items-center justify-content-center"
@@ -63,7 +68,6 @@ const Header: React.FC<ChildComponentProps> = ({ history }) => {
               />
             </button>
           </form>
-          {errors["search"] && <p className="text-error">{errors["search"]}</p>}
         </div>
       </div>
     </header>
