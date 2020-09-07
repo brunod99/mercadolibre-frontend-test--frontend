@@ -40,3 +40,28 @@ $fonts: (
 }
 
 @include gen-props("f-weight", "font-weight");
+
+/* ----------- Distance ------------- */
+$distances: (
+  regular: $margin,
+  large: $margin-large,
+);
+
+@mixin gen-props($prefix, $property) {
+  @each $distance-name, $distance in $distances {
+    .#{$prefix}-#{$distance-name} {
+      #{$property}: $distance !important;
+    }
+  }
+}
+
+@include gen-props("m", "margin");
+@include gen-props("mt", "margin-top");
+@include gen-props("mb", "margin-bottom");
+@include gen-props("mr", "margin-right");
+@include gen-props("ml", "margin-left");
+@include gen-props("p", "padding");
+@include gen-props("pt", "padding-top");
+@include gen-props("pb", "padding-bottom");
+@include gen-props("pr", "padding-right");
+@include gen-props("pl", "padding-left");
