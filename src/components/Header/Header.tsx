@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { History } from "history";
 import MagnifyGlass from "../../assets/img/ic_Search.png";
 import MagnifyGlass2x from "../../assets/img/ic_Search@2x.png";
@@ -7,6 +7,7 @@ import Logo2x from "../../assets/img/Logo_ML@2x.png";
 import CONSTANTS from "../../constants";
 import useForm from "../../hooks/useForm";
 import validateSearch from "../../validations/validateSearch";
+import Message from "../../utils/message";
 
 interface ChildComponentProps {
   history: History;
@@ -28,6 +29,12 @@ const Header: React.FC<ChildComponentProps> = ({ history }) => {
     handleSuccess
   );
 
+  useEffect(() => {
+    if (errors["search"]) {
+      Message("error", "Hubo un error", errors["search"]);
+    }
+  }, [errors]);
+
   const { search } = values;
 
   return (
@@ -44,7 +51,7 @@ const Header: React.FC<ChildComponentProps> = ({ history }) => {
             className="header__form d-flex h-100"
             onSubmit={handleSubmit}
           >
-            <div className="header__input-group">
+            <div className="header__input-group w-100">
               <input
                 type="text"
                 name="search"
@@ -52,10 +59,8 @@ const Header: React.FC<ChildComponentProps> = ({ history }) => {
                 onBlur={handleFieldEvents}
                 onChange={handleFieldEvents}
                 value={search}
+                className="h-100"
               />
-              {errors["search"] && (
-                <p className="text-error">{errors["search"]}</p>
-              )}
             </div>
             <button
               type="submit"
