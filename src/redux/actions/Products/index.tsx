@@ -18,13 +18,13 @@ import {
 import axiosClient from "../../../config/axios";
 import { IProduct } from "../../../types/Components/Products";
 
+// ---------------------- Products ----------------------- //
 export function getProductsActions(query: string | null) {
   return async (dispatch: (arg0: ProductsActionTypes) => void) => {
     dispatch(getProductsCall(true));
 
     try {
-      const response = await axiosClient.get(`/items/?q=${query}`);
-      console.log({ response });
+      const response = await axiosClient.get(`/itemss/?q=${query}`);
 
       dispatch(getProductsSuccess(response.data));
     } catch (error) {
@@ -34,18 +34,23 @@ export function getProductsActions(query: string | null) {
   };
 }
 
-// ---------------------- Products ----------------------- //
-const getProductsCall = (loading: ILoadingState): IGetProductsCall => ({
+const getProductsCall: (
+  loading: IGetProductsCall["payload"]
+) => IGetProductsCall = (loading) => ({
   type: GET_PRODUCTS_CALL,
   payload: loading,
 });
 
-const getProductsSuccess = (products: IProduct[]): IGetProductsCallSuccess => ({
+const getProductsSuccess: (
+  products: IGetProductsCallSuccess["payload"]
+) => IGetProductsCallSuccess = (products) => ({
   type: GET_PRODUCTS_SUCCESS,
   payload: products,
 });
 
-const getProductsError = (error: IErrorState): IGetProductsCallError => ({
+const getProductsError: (
+  error: IGetProductsCallError["payload"]
+) => IGetProductsCallError = (error) => ({
   type: GET_PRODUCTS_ERROR,
   payload: error,
 });

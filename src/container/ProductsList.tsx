@@ -11,18 +11,19 @@ const ProductsList: React.FC = () => {
   const searchParam = getUrlParams("search");
 
   useEffect(() => {
-    dispatch(getProductsActions(searchParam));
+    console.log({ searchParam });
+    if (searchParam) dispatch(getProductsActions(searchParam));
 
     // eslint-disable-next-line
   }, [searchParam]);
 
   const { products } = useSelector((state: IInitialState) => state);
 
-  const productsMemorized = getProductsSelector(products);
+  const productsMemorized = products;
 
   return (
     <section className="products-list bg-white border-radius">
-      {productsMemorized.map((product) => {
+      {/* {productsMemorized.map((product) => {
         const { id, title, price, picture, free_shipping, address } = product;
         return (
           <ProductsListItem
@@ -34,7 +35,7 @@ const ProductsList: React.FC = () => {
             address={address}
           />
         );
-      })}
+      })} */}
     </section>
   );
 };

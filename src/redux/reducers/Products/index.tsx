@@ -32,9 +32,11 @@ export default function (state = initialState, action: ProductsActionTypes) {
         error: action.payload,
       };
     case GET_PRODUCTS_SUCCESS:
+      console.log({ success: action.payload });
       return {
         ...initialState,
-        products: action.payload,
+        products: action.payload.items,
+        categories: action.payload.categories,
       };
     case GET_SINGLE_PRODUCT_CALL:
       return {
@@ -48,6 +50,7 @@ export default function (state = initialState, action: ProductsActionTypes) {
         error: action.payload,
       };
     case GET_SINGLE_PRODUCT_SUCCESS:
+      console.log({ success: action.payload });
       return {
         ...initialState,
         products: action.payload,

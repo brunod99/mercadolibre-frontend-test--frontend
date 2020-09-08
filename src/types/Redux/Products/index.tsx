@@ -22,7 +22,7 @@ export interface IGetProductsCall {
 
 export interface IGetProductsCallSuccess {
   type: typeof GET_PRODUCTS_SUCCESS;
-  payload: IProduct[];
+  payload: { items: Array<IProduct>; categories: Array<IBreadCrumb> };
 }
 
 export interface IGetProductsCallError {
@@ -56,7 +56,7 @@ export type ProductsActionTypes =
 
 // Initial State
 export interface IInitialState {
-  products: IProduct[] | [];
+  products: Array<IProduct> | [];
   singleProduct: IProduct | [];
   categories: IBreadCrumb | [];
   loading: ILoadingState;
