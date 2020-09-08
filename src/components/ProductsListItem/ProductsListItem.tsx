@@ -4,6 +4,7 @@ import ShoppingImg from "../../assets/img/ic_shipping.png";
 import ShoppingImg2x from "../../assets/img/ic_shipping@2x.png";
 
 export interface ProductsListItemProps {
+  id: string;
   picture: string;
   title: string;
   price: {
@@ -21,6 +22,7 @@ export interface ProductsListItemProps {
 }
 
 const ProductsListItem: React.FC<ProductsListItemProps> = ({
+  id,
   picture,
   title,
   price,
@@ -28,7 +30,10 @@ const ProductsListItem: React.FC<ProductsListItemProps> = ({
   address,
 }) => {
   return (
-    <Link className="products-list-item d-flex align-items-center" to="/">
+    <Link
+      className="products-list-item d-flex align-items-center"
+      to={`/items/${id}`}
+    >
       {/* Img */}
       <img
         src={picture}
@@ -41,14 +46,12 @@ const ProductsListItem: React.FC<ProductsListItemProps> = ({
         <div className="products-list-item__text  w-100 d-flex justify-content-between align-items-end mb-large">
           {/* Price + Shipping */}
           <div className="products-list-item__price-container d-flex align-items-end">
-            <h3 className="products-list-item__price title mr-regular">
-              ${price.amount}
-            </h3>
+            <h3 className="products-list-item__price title">${price.amount}</h3>
             {free_shipping && (
               <img
                 srcSet={`${ShoppingImg} 1x, ${ShoppingImg2x} 2x`}
                 src={ShoppingImg}
-                alt=""
+                alt="Free shipping"
                 className="products-list-item__shipping"
               />
             )}

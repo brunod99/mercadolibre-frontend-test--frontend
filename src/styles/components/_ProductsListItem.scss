@@ -7,13 +7,24 @@
     border-bottom: initial;
   }
 
+  // Img
   .products-list-item__img {
     width: rem(180);
     height: rem(180);
     border-radius: rem(4);
   }
 
+  // Content
   .products-list-item__content {
+    .products-list-item__text {
+      .products-list-item__price-container {
+        .products-list-item__price {
+          line-height: 0.7;
+          margin-right: rem(10);
+        }
+      }
+    }
+
     .products-list-item__title {
       font-size: rem(18);
       width: $col * 4;
