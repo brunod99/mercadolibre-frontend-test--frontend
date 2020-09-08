@@ -3,27 +3,32 @@ import { useDispatch, useSelector } from "react-redux";
 import ProductsListItem from "../components/ProductsListItem/ProductsListItem";
 import { getProductsActions } from "../redux/actions/Products";
 import { getProductsSelector } from "../selectors/Products";
-import { IInitialState } from "../types/Redux/Products";
+import { IInitialProductsState } from "../types/Redux/Products";
 import { getUrlParams } from "../utils";
 
 const ProductsList: React.FC = () => {
+  // Redux
   const dispatch = useDispatch();
+  const { products } = useSelector(
+    (state: { products: IInitialProductsState }) => state.products
+  );
+
+  // Utils
   const searchParam = getUrlParams("search");
 
+  // Selector
+  const productsMemorized = getProductsSelector(products);
+
+  // Hook
   useEffect(() => {
-    console.log({ searchParam });
     if (searchParam) dispatch(getProductsActions(searchParam));
 
     // eslint-disable-next-line
   }, [searchParam]);
 
-  const { products } = useSelector((state: IInitialState) => state);
-
-  const productsMemorized = products;
-
   return (
     <section className="products-list bg-white border-radius">
-      {/* {productsMemorized.map((product) => {
+      {productsMemorized.map((product) => {
         const { id, title, price, picture, free_shipping, address } = product;
         return (
           <ProductsListItem
@@ -33,9 +38,10 @@ const ProductsList: React.FC = () => {
             price={price}
             free_shipping={free_shipping}
             address={address}
+            key={id}
           />
         );
-      })} */}
+      })}
     </section>
   );
 };

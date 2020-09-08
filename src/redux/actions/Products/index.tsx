@@ -24,7 +24,7 @@ export function getProductsActions(query: string | null) {
     dispatch(getProductsCall(true));
 
     try {
-      const response = await axiosClient.get(`/itemss/?q=${query}`);
+      const response = await axiosClient.get(`/items/?q=${query}`);
 
       dispatch(getProductsSuccess(response.data));
     } catch (error) {

@@ -10,6 +10,8 @@ const useForm: HookUseSearchType = (initialState, validations, fn) => {
   useEffect(() => {
     if (submitForm) {
       if (Object.keys(errors).length === 0) {
+        setValues(initialState);
+
         fn();
       }
 

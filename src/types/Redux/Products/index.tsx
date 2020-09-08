@@ -55,7 +55,7 @@ export type ProductsActionTypes =
   | IGetSingleProductCallError;
 
 // Initial State
-export interface IInitialState {
+export interface IInitialProductsState {
   products: Array<IProduct> | [];
   singleProduct: IProduct | [];
   categories: IBreadCrumb | [];

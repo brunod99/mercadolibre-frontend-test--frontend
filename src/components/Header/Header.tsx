@@ -36,6 +36,7 @@ const Header: React.FC<ChildComponentProps> = ({ history }) => {
     }
   }, [errors]);
 
+  // Destructuring
   const { q } = values;
 
   return (
