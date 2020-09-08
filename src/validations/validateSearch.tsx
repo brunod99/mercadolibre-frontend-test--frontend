@@ -12,7 +12,7 @@ const validateSearch: HookUseSearchValidationType = (fieldValues) => {
     const value = fieldValues[keyVal];
 
     switch (keyVal) {
-      case "search":
+      case "q":
         if (value.length < 1) {
           return (validateSearchErrors[keyVal] =
             "Por favor elije tu artículo a buscar");

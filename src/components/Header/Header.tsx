@@ -9,7 +9,7 @@ import CONSTANTS from "../../constants";
 import useForm from "../../hooks/useForm";
 import validateSearch from "../../validations/validateSearch";
 import Message from "../../utils/message";
-
+import { encodeQuery } from "../../utils";
 interface ChildComponentProps {
   history: History;
 }
@@ -20,7 +20,7 @@ const Header: React.FC<ChildComponentProps> = ({ history }) => {
 
   // Handlers
   const handleSuccess = () => {
-    history.push("/items");
+    history.push(`/items?search=${encodeQuery(q)}`);
   };
 
   // Hooks
@@ -31,12 +31,12 @@ const Header: React.FC<ChildComponentProps> = ({ history }) => {
   );
 
   useEffect(() => {
-    if (errors["search"]) {
-      Message("error", "Hubo un error", errors["search"]);
+    if (errors["q"]) {
+      Message("error", "Hubo un error", errors["q"]);
     }
   }, [errors]);
 
-  const { search } = values;
+  const { q } = values;
 
   return (
     <header className="header bg-primary">
@@ -55,11 +55,11 @@ const Header: React.FC<ChildComponentProps> = ({ history }) => {
             <div className="header__input-group w-100">
               <input
                 type="text"
-                name="search"
+                name="q"
                 placeholder="Nunca dejes de buscar"
                 onBlur={handleFieldEvents}
                 onChange={handleFieldEvents}
-                value={search}
+                value={q}
                 className="h-100"
               />
             </div>
