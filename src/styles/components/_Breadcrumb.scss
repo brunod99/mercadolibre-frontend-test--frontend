@@ -1,0 +1,25 @@
+.breadcrumbs {
+  .breadcrumbs__list {
+    .breadcrumbs__list-item {
+      margin-right: rem(6);
+      cursor: pointer;
+
+      // After
+      &::after {
+        content: ">";
+        color: $light-color;
+        padding-left: rem(6);
+      }
+
+      // Last child
+      &:last-child {
+        font-weight: $bold;
+
+        // After
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}
