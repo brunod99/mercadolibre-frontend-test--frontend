@@ -1,19 +1,5 @@
 import React from "react";
-
-interface IProductDetail {
-  id: string;
-  condition: string;
-  sold_quantity: number;
-  description: string;
-  picture: string;
-  title: string;
-  price: {
-    currency: string;
-    amount: number;
-    decimals: number;
-  };
-  free_shipping: boolean;
-}
+import { IProductDetail } from "../../types/Components/Products";
 
 const ProductDetail: React.FC<IProductDetail> = ({
   condition,

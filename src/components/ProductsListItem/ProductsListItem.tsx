@@ -2,26 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ShoppingImg from "../../assets/img/ic_shipping.png";
 import ShoppingImg2x from "../../assets/img/ic_shipping@2x.png";
+import { IProductsListItem } from "../../types/Components/Products";
 
-export interface ProductsListItemProps {
-  id: string;
-  picture: string;
-  title: string;
-  price: {
-    currency: string;
-    amount: number;
-    decimals: number;
-  };
-  free_shipping: boolean;
-  address: {
-    state_id: string;
-    state_name: string;
-    city_id: string;
-    city_name: string;
-  };
-}
-
-const ProductsListItem: React.FC<ProductsListItemProps> = ({
+const ProductsListItem: React.FC<IProductsListItem> = ({
   id,
   picture,
   title,
