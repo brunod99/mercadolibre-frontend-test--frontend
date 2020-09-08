@@ -1,0 +1,14 @@
+.product-detail {
+  // Main
+  .product-detail__main {
+    // Img
+    .product-detail__img {
+      width: rem(680);
+    }
+
+    // Content
+    .product-detail__main-content {
+      width: $col * 3;
+    }
+  }
+}

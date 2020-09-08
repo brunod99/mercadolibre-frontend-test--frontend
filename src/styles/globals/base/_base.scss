@@ -142,11 +142,13 @@ button {
   cursor: pointer;
   outline: none;
   padding: 0;
+  color: inherit;
 
   // Hover
   &:hover,
   &:focus,
   &:active {
+    color: inherit;
     outline: none;
     -moz-outline-style: none;
   }
@@ -187,7 +189,7 @@ ul {
 /* --------- TYPOGRAPHY ---------- */
 .title {
   font-size: rem(24);
-  line-height: 0.7;
+  line-height: 1.1;
 }
 
 .subtitle {

@@ -1,8 +1,5 @@
 import React from "react";
-
-interface IBreadCrumb {
-  categories: string[];
-}
+import { IBreadCrumb } from "../../types/Components/Breadcrumb";
 
 const Breadcrumb: React.FC<IBreadCrumb> = ({ categories }) => {
   return (
