@@ -1,4 +1,4 @@
-import { IProductsListItem, IProductDetail } from "../../Components/Products";
+import { IProduct } from "../../Components/Products";
 import { IBreadCrumb } from "../../Components/Breadcrumb";
 
 export const GET_PRODUCTS_CALL = "GET_PRODUCTS_CALL";
@@ -22,7 +22,7 @@ export interface IGetProductsCall {
 
 export interface IGetProductsCallSuccess {
   type: typeof GET_PRODUCTS_SUCCESS;
-  payload: IProductsListItem;
+  payload: IProduct[];
 }
 
 export interface IGetProductsCallError {
@@ -38,7 +38,7 @@ export interface IGetSingleProductsCall {
 
 export interface IGetSingleProductCallSuccess {
   type: typeof GET_SINGLE_PRODUCT_SUCCESS;
-  payload: IProductDetail;
+  payload: IProduct;
 }
 
 export interface IGetSingleProductCallError {
@@ -56,8 +56,8 @@ export type ProductsActionTypes =
 
 // Initial State
 export interface IInitialState {
-  products: IProductsListItem | [];
-  singleProduct: IProductDetail | [];
+  products: IProduct[] | [];
+  singleProduct: IProduct | [];
   categories: IBreadCrumb | [];
   loading: ILoadingState;
   error: IErrorState;

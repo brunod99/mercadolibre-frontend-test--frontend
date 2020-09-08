@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ShoppingImg from "../../assets/img/ic_shipping.png";
 import ShoppingImg2x from "../../assets/img/ic_shipping@2x.png";
-import { IProductsListItem } from "../../types/Components/Products";
+import { IProduct } from "../../types/Components/Products";
 
-const ProductsListItem: React.FC<IProductsListItem> = ({
+const ProductsListItem: React.FC<IProduct> = ({
   id,
   picture,
   title,
@@ -41,7 +41,7 @@ const ProductsListItem: React.FC<IProductsListItem> = ({
           </div>
 
           {/* City */}
-          <h6 className="products-list-item__city">{address.state_name}</h6>
+          <h6 className="products-list-item__city">{address?.state_name}</h6>
         </div>
 
         <h2 className="products-list-item__title">{title}</h2>

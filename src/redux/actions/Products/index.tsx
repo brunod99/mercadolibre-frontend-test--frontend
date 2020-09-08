@@ -16,17 +16,16 @@ import {
   ProductsActionTypes,
 } from "../../../types/Redux/Products";
 import axiosClient from "../../../config/axios";
-import {
-  IProductDetail,
-  IProductsListItem,
-} from "../../../types/Components/Products";
+import { IProduct } from "../../../types/Components/Products";
 
-export function getProductsActions(query: string) {
+export function getProductsActions(query: string | null) {
   return async (dispatch: (arg0: ProductsActionTypes) => void) => {
     dispatch(getProductsCall(true));
 
     try {
       const response = await axiosClient.get(`/items/?q=${query}`);
+      console.log({ response });
+
       dispatch(getProductsSuccess(response.data));
     } catch (error) {
       console.log(error);
@@ -41,9 +40,7 @@ const getProductsCall = (loading: ILoadingState): IGetProductsCall => ({
   payload: loading,
 });
 
-const getProductsSuccess = (
-  products: IProductsListItem
-): IGetProductsCallSuccess => ({
+const getProductsSuccess = (products: IProduct[]): IGetProductsCallSuccess => ({
   type: GET_PRODUCTS_SUCCESS,
   payload: products,
 });
@@ -76,7 +73,7 @@ const getSingleProductCall = (
 });
 
 const getSingleProductSuccess = (
-  singleProduct: IProductDetail
+  singleProduct: IProduct
 ): IGetSingleProductCallSuccess => ({
   type: GET_SINGLE_PRODUCT_SUCCESS,
   payload: singleProduct,

@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ProductsListItem from "../components/ProductsListItem/ProductsListItem";
-import MOCK_DATA from "../constants/__mockData__";
+import { getProductsActions } from "../redux/actions/Products";
+import { getProductsSelector } from "../selectors/Products";
+import { IInitialState } from "../types/Redux/Products";
+import { getUrlParams } from "../utils";
 
 const ProductsList: React.FC = () => {
-  const { ITEMS } = MOCK_DATA;
+  const dispatch = useDispatch();
+  const searchParam = getUrlParams("search");
+
+  useEffect(() => {
+    dispatch(getProductsActions(searchParam));
+
+    // eslint-disable-next-line
+  }, [searchParam]);
+
+  const { products } = useSelector((state: IInitialState) => state);
+
+  const productsMemorized = getProductsSelector(products);
 
   return (
     <section className="products-list bg-white border-radius">
-      {ITEMS.map((item) => {
-        const { id, title, price, picture, free_shipping, address } = item;
+      {productsMemorized.map((product) => {
+        const { id, title, price, picture, free_shipping, address } = product;
         return (
           <ProductsListItem
             id={id}
