@@ -1,0 +1,22 @@
+.products-list-item {
+  padding-right: $col + $gap;
+  border-bottom: rem(1) solid $terciary-4;
+
+  // Last child
+  &:last-child {
+    border-bottom: initial;
+  }
+
+  .products-list-item__img {
+    width: rem(180);
+    height: rem(180);
+    border-radius: rem(4);
+  }
+
+  .products-list-item__content {
+    .products-list-item__title {
+      font-size: rem(18);
+      width: $col * 4;
+    }
+  }
+}

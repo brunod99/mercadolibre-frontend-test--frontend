@@ -1,9 +1,9 @@
 import React from "react";
-import ProductsList from "../../components/ProductsList/ProductsList";
+import ProductsList from "../../container/ProductsList";
 
 const Products: React.FC = () => {
   return (
-    <main className="products">
+    <main className="products container">
       <ProductsList />
     </main>
   );

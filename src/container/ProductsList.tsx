@@ -1,9 +1,9 @@
 import React from "react";
-import ProductsListItem from "./ProductsListItem";
+import ProductsListItem from "../components/ProductsListItem/ProductsListItem";
 
 const ProductsList: React.FC = () => {
   return (
-    <section className="products-list bg-white">
+    <section className="products-list bg-white border-radius">
       <ProductsListItem
         picture="http://http2.mlstatic.com/D_987543-MLA31352339877_072019-I.jpg"
         title="Apple Ipod Touch 5g 16gb Negro Igual a Nuevo Completo Unico!"
