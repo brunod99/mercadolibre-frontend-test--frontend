@@ -21,12 +21,12 @@ import {
   IProductsListItem,
 } from "../../../types/Components/Products";
 
-export function getProductsActions() {
+export function getProductsActions(query: string) {
   return async (dispatch: (arg0: ProductsActionTypes) => void) => {
     dispatch(getProductsCall(true));
 
     try {
-      const response = await axiosClient.get("/items/?q=");
+      const response = await axiosClient.get(`/items/?q=${query}`);
       dispatch(getProductsSuccess(response.data));
     } catch (error) {
       console.log(error);
@@ -35,7 +35,7 @@ export function getProductsActions() {
   };
 }
 
-// Products
+// ---------------------- Products ----------------------- //
 const getProductsCall = (loading: ILoadingState): IGetProductsCall => ({
   type: GET_PRODUCTS_CALL,
   payload: loading,
@@ -53,7 +53,21 @@ const getProductsError = (error: IErrorState): IGetProductsCallError => ({
   payload: error,
 });
 
-// Single Products
+// ---------------------- Single Products ----------------------- //
+export function getSingleProductActions(id: string) {
+  return async (dispatch: (arg0: ProductsActionTypes) => void) => {
+    dispatch(getSingleProductCall(true));
+
+    try {
+      const response = await axiosClient.get(`/items/${id}`);
+      dispatch(getSingleProductSuccess(response.data));
+    } catch (error) {
+      console.log(error);
+      dispatch(getSingleProductError(true));
+    }
+  };
+}
+
 const getSingleProductCall = (
   loading: ILoadingState
 ): IGetSingleProductsCall => ({
