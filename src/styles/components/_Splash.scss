@@ -8,9 +8,9 @@
 
   &--state-animation {
     animation-name: slideOutUp;
-    animation-duration: 1s;
+    animation-duration: 0.7s;
     animation-delay: 1.5s;
-    animation-timing-function: ease-out;
+    animation-timing-function: ease-in;
     animation-fill-mode: forwards;
   }
 
