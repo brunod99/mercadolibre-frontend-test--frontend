@@ -1,44 +1,66 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Mercadolibre frontend test -> Frontend
 
-## Available Scripts
+Esta es una prueba para la posición de Frontend Developer en MercadoLibre.
 
-In the project directory, you can run:
+## Tecnologías
 
-### `npm start`
+Para el desarrollo del mismo se usó:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Node
+- Typescript
+- React
+- Redux
+- Redux thunk
+- Reselect
+- Axios
+- Sweetalert2
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Planificado
 
-### `npm test`
+Para el desarrollo del frontend, se realizó con anticipo al desarrollo un diagrama para graficar el flujo de navegación dentro de la aplicación. El mismo se puede ver en el siguiente link:
+https://drive.google.com/file/d/1WWJbJhBW0CRL5MNbSSoSVCyEnWKlPLMM/view?usp=sharing
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Decisiones
 
-### `npm run build`
+A continuación voy a aclarar el por qué de las tecnologías utilizadas:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Typescript: Fue agregado teniendo en cuenta escabilidad tanto del proyecto como del equipo de trabajo por sus conocidas características, principalmente el tipado estructurado que ayuda a reducir la cantidad de bugs en la aplicación. Aclaración: Si bien realicé trabajos previamente con Typescript, es un lenguaje que sigo aprendiendo y por lo tanto pueden haber casos de usos no tan óptimos.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- Redux: Elegido como mi manejador de estados por que en mi opinión para aplicaciones de larga escala como sería el caso de Mercadolibre es mas performante por sus acomples con memorizado de reselect, por la cantidad de personas en la comunidad y por el manejo de dispatchs que no re-renderiza los componentes a diferencia de otras librerías como ser Context API.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Reselect: Para ayudar en performance por su habilidad de memorizado. Aclarar que se puede usar con otras librerías de manejos de estados, pero que acopla perfecto con redux.
 
-### `npm run eject`
+- Redux thunk: Elegido como mi middleware, por en mi opinión funcionamiento más cómodo cuando se utiliza datas asíncronas proveyentes de APIs, a diferencia de otras alternativas como redux sagas.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Axios: Elegido por su facilidad de uso y por el método nativo de la librería de crear clientes.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Sweetalert: Elegido para notificación de errores por su facil uso y diseño de UI.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Aclaraciones
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Tipado de interfaz de products: Fue tipado solamente lo utilizado y esencial de la respuesta al proveer de muchos campos la misma.
+- Tomando de referncia la página de mercadolibre, se decidió hacer el rederigimiento a las respectivas páginas de productos después del fetcheo de la información y mejorar el UX del usuario.
+- Uso de issues, labels, branches y nomeclatura para mostrar habilidades en uso de git y Github. Milestone no se agregó debido a que es un test.
+- Parámetro de loading fue agregado en el estado pero no utilizado en la aplicación, esto fue por presunta futura escabilidad de la aplicación.
+- El uso de variables, documentacion, funciones, etc (excpeto textos visibles en la UI) fue realizado en inglés para mayor facilidad en desarrollo con equipos de distintas nacionalidades y lenguas.
+- Cuando se hace click en algunos items para ingresar al detalle del producto, aunque en la API de search esté listado, en las otras dos da 404.
+- No fue agregado responsive debido a tiempos de entrega. Es algo totalmente posible de realizar en el futuro.
+- Fue agregadad animación en home para mejora de UX en flujo de usuario
 
-## Learn More
+## Instalación y uso
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Para poder inicializar el frontend, ejecutar los siguientes comandos:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+  npm install
+  npm start
+```
+
+Si se esta usando en desarrollo, deberá levantarse el middleware también siguiendo sus respectivas instrucciones.
+
+### CI
+
+Fue agregado tanto el middleware como la aplicación a los CIs de Heroku y Netlify en caso de error con levantado de aplicación. Los mismos se pueden ver en los siguientes URLS:
+
+- Heroku: https://mercadolibre-frontend-test.herokuapp.com/api/
+- Netlify: https://mercadolibre-frontend-test.netlify.app/
