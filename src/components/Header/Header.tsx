@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { History } from "history";
 import { Link } from "react-router-dom";
 import MagnifyGlass from "../../assets/img/ic_Search.png";
@@ -22,6 +22,11 @@ const Header: React.FC<IHeader> = ({ history }) => {
   // Constants
   const { HEADER_FORM_INITIAL_STATE } = CONSTANTS;
 
+  // Handlers
+  const handleSuccess = () => {
+    dispatch(getProductsActions(encodedValue));
+  };
+
   // Redux
   const dispatch = useDispatch();
   const { products } = useSelector(
@@ -30,14 +35,6 @@ const Header: React.FC<IHeader> = ({ history }) => {
 
   // Selector
   const productsMemorized = getProductsSelector(products);
-
-  // Handlers
-  const handleSuccess = () => {
-    dispatch(getProductsActions(encodedValue));
-  };
-
-  // Utils
-  const searchParam = getUrlParams("search");
 
   // Hooks
   // - Custom hook
@@ -50,12 +47,14 @@ const Header: React.FC<IHeader> = ({ history }) => {
   } = useForm(HEADER_FORM_INITIAL_STATE, validateSearch, handleSuccess);
 
   // - Effects
+  // Effect that show modal if there is an error in search
   useEffect(() => {
-    if (errors["q"]) {
-      Message("error", "Hubo un error", errors["q"]);
+    if (errors["search"]) {
+      Message("error", "Hubo un error", errors["search"]);
     }
   }, [errors]);
 
+  // Effect that if there is a new product search, push to the page list and clear value
   useEffect(() => {
     if (encodedValue) {
       history.push(`/items?search=${encodedValue}`);
@@ -65,6 +64,7 @@ const Header: React.FC<IHeader> = ({ history }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productsMemorized]);
 
+  // Effect on first render, checks if there is a product on URL and dispatch products
   useEffect(() => {
     if (searchParam) dispatch(getProductsActions(searchParam));
 
@@ -72,9 +72,11 @@ const Header: React.FC<IHeader> = ({ history }) => {
   }, []);
 
   // Destructuring
-  const { q } = values;
+  const { search } = values;
 
-  const encodedValue = encodeQuery(q);
+  // Utils
+  const searchParam = getUrlParams("search");
+  const encodedValue = encodeQuery(search);
 
   return (
     <header className="header bg-primary">
@@ -85,19 +87,15 @@ const Header: React.FC<IHeader> = ({ history }) => {
         </Link>
         <div className="header__search-bar w-100">
           {/* Form */}
-          <form
-            action=""
-            className="header__form d-flex h-100"
-            onSubmit={handleSubmit}
-          >
+          <form className="header__form d-flex h-100" onSubmit={handleSubmit}>
             <div className="header__input-group w-100">
               <input
                 type="text"
-                name="q"
+                name="search"
                 placeholder="Nunca dejes de buscar"
                 onBlur={handleFieldEvents}
                 onChange={handleFieldEvents}
-                value={q}
+                value={search}
                 className="h-100"
               />
             </div>

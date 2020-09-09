@@ -1,21 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import ProductsListItem from "../components/ProductsListItem/ProductsListItem";
-import { getProductsSelector } from "../selectors/Products";
-import { IInitialProductsState } from "../types/Redux/Products";
+import { IProduct } from "../types/Components/Products";
 
-const ProductsList: React.FC = () => {
-  // Redux
-  const { products } = useSelector(
-    (state: { products: IInitialProductsState }) => state.products
-  );
+interface IProductsList {
+  products: IProduct[];
+}
 
-  // Selector
-  const productsMemorized = getProductsSelector(products);
-
+const ProductsList: React.FC<IProductsList> = ({ products }) => {
   return (
     <section className="products-list bg-white border-radius">
-      {productsMemorized.map((product) => {
+      {products.map((product) => {
         const { id, title, price, picture, free_shipping, address } = product;
         return (
           <ProductsListItem

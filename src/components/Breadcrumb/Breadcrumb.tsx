@@ -1,7 +1,7 @@
 import React from "react";
-import { IBreadCrumb } from "../../types/Components/Breadcrumb";
+import { IBreadcrumb } from "../../types/Components/Breadcrumb";
 
-const Breadcrumb: React.FC<IBreadCrumb> = ({ categories }) => {
+const Breadcrumb: React.FC<IBreadcrumb> = ({ categories }) => {
   return (
     <section className="breadcrumbs pt-regular pb-regular quantity">
       <ul className="breadcrumbs__list d-flex align-items-center">
