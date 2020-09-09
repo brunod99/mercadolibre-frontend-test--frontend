@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 import Splash from "../components/Splash";
 import { IInitialProductsState } from "../types/Redux/Products";
 const Home: React.FC = () => {
-  const { products } = useSelector(
+  const { products, singleProduct } = useSelector(
     (state: { products: IInitialProductsState }) => state.products
   );
 
   return (
     <main className="home overflow-hidden">
-      {products.length === 0 && (
+      {products.length === 0 && !singleProduct && (
         <Splash isAnimated>
           <h1 className="text-white f-weight-bold">
             ¡Bienvenido a Mercado Libre!

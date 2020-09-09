@@ -26,7 +26,7 @@ export default class ErrorBoundary extends Component {
     // in our application
     return (
       <Splash>
-        <h1 className="text-white">
+        <h1 className="text-white f-weight-bold">
           Hubo Un error :( Mira en la consulta para mas información
         </h1>
       </Splash>
