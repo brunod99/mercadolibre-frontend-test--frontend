@@ -94,7 +94,11 @@ const Header: React.FC = () => {
       <div className="container d-flex">
         {/* Logo */}
         <Link className="header__img d-flex align-items-end" to="/">
-          <img srcSet={`${Logo} 1x, ${Logo2x} 2x`} src={Logo} alt="Search" />
+          <img
+            srcSet={`${Logo} 1x, ${Logo2x} 2x`}
+            src={Logo}
+            alt="Mercado Libre"
+          />
         </Link>
         <div className="header__search-bar w-100">
           {/* Form */}

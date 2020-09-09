@@ -1,0 +1,24 @@
+.splash {
+  width: 100%;
+  height: calc(100vh);
+  left: 0;
+  top: 0;
+  position: absolute;
+  z-index: 2;
+
+  &--state-animation {
+    animation-name: slideOutUp;
+    animation-duration: 0.7s;
+    animation-delay: 1.5s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+  }
+
+  img {
+    margin-bottom: rem(60);
+  }
+
+  h1 {
+    font-size: rem(50);
+  }
+}
