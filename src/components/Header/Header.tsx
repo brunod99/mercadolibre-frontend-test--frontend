@@ -9,34 +9,74 @@ import CONSTANTS from "../../constants";
 import useForm from "../../hooks/useForm";
 import validateSearch from "../../validations/validateSearch";
 import Message from "../../utils/message";
-
-interface ChildComponentProps {
+import { encodeQuery, getUrlParams } from "../../utils";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsActions } from "../../redux/actions/Products";
+import { IInitialProductsState } from "../../types/Redux/Products";
+import { getProductsSelector } from "../../selectors/Products";
+interface IHeader {
   history: History;
 }
 
-const Header: React.FC<ChildComponentProps> = ({ history }) => {
+const Header: React.FC<IHeader> = ({ history }) => {
   // Constants
   const { HEADER_FORM_INITIAL_STATE } = CONSTANTS;
 
   // Handlers
   const handleSuccess = () => {
-    history.push("/items");
+    dispatch(getProductsActions(encodedValue));
   };
 
-  // Hooks
-  const { values, errors, handleFieldEvents, handleSubmit } = useForm(
-    HEADER_FORM_INITIAL_STATE,
-    validateSearch,
-    handleSuccess
+  // Redux
+  const dispatch = useDispatch();
+  const { products } = useSelector(
+    (state: { products: IInitialProductsState }) => state.products
   );
 
+  // Selector
+  const productsMemorized = getProductsSelector(products);
+
+  // Hooks
+  // - Custom hook
+  const {
+    values,
+    errors,
+    handleFieldEvents,
+    handleSubmit,
+    clearValue,
+  } = useForm(HEADER_FORM_INITIAL_STATE, validateSearch, handleSuccess);
+
+  // - Effects
+  // Effect that show modal if there is an error in search
   useEffect(() => {
     if (errors["search"]) {
       Message("error", "Hubo un error", errors["search"]);
     }
   }, [errors]);
 
+  // Effect that if there is a new product search, push to the page list and clear value
+  useEffect(() => {
+    if (encodedValue) {
+      history.push(`/items?search=${encodedValue}`);
+      clearValue();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productsMemorized]);
+
+  // Effect on first render, checks if there is a product on URL and dispatch products
+  useEffect(() => {
+    if (searchParam) dispatch(getProductsActions(searchParam));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Destructuring
   const { search } = values;
+
+  // Utils
+  const searchParam = getUrlParams("search");
+  const encodedValue = encodeQuery(search);
 
   return (
     <header className="header bg-primary">
@@ -47,11 +87,7 @@ const Header: React.FC<ChildComponentProps> = ({ history }) => {
         </Link>
         <div className="header__search-bar w-100">
           {/* Form */}
-          <form
-            action=""
-            className="header__form d-flex h-100"
-            onSubmit={handleSubmit}
-          >
+          <form className="header__form d-flex h-100" onSubmit={handleSubmit}>
             <div className="header__input-group w-100">
               <input
                 type="text"

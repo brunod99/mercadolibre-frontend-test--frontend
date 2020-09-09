@@ -16,17 +16,16 @@ import {
   ProductsActionTypes,
 } from "../../../types/Redux/Products";
 import axiosClient from "../../../config/axios";
-import {
-  IProductDetail,
-  IProductsListItem,
-} from "../../../types/Components/Products";
+import { IProduct } from "../../../types/Components/Products";
 
-export function getProductsActions(query: string) {
+// ---------------------- Products ----------------------- //
+export function getProductsActions(query: string | null) {
   return async (dispatch: (arg0: ProductsActionTypes) => void) => {
     dispatch(getProductsCall(true));
 
     try {
       const response = await axiosClient.get(`/items/?q=${query}`);
+
       dispatch(getProductsSuccess(response.data));
     } catch (error) {
       console.log(error);
@@ -35,20 +34,23 @@ export function getProductsActions(query: string) {
   };
 }
 
-// ---------------------- Products ----------------------- //
-const getProductsCall = (loading: ILoadingState): IGetProductsCall => ({
+const getProductsCall: (
+  loading: IGetProductsCall["payload"]
+) => IGetProductsCall = (loading) => ({
   type: GET_PRODUCTS_CALL,
   payload: loading,
 });
 
-const getProductsSuccess = (
-  products: IProductsListItem
-): IGetProductsCallSuccess => ({
+const getProductsSuccess: (
+  products: IGetProductsCallSuccess["payload"]
+) => IGetProductsCallSuccess = (products) => ({
   type: GET_PRODUCTS_SUCCESS,
   payload: products,
 });
 
-const getProductsError = (error: IErrorState): IGetProductsCallError => ({
+const getProductsError: (
+  error: IGetProductsCallError["payload"]
+) => IGetProductsCallError = (error) => ({
   type: GET_PRODUCTS_ERROR,
   payload: error,
 });
@@ -76,7 +78,7 @@ const getSingleProductCall = (
 });
 
 const getSingleProductSuccess = (
-  singleProduct: IProductDetail
+  singleProduct: IProduct
 ): IGetSingleProductCallSuccess => ({
   type: GET_SINGLE_PRODUCT_SUCCESS,
   payload: singleProduct,

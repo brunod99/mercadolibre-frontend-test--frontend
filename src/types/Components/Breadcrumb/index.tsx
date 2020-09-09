@@ -1,3 +1,5 @@
-export interface IBreadCrumb {
-  categories: string[];
+export type CategoriesType = Array<string>;
+
+export interface IBreadcrumb {
+  categories: CategoriesType;
 }

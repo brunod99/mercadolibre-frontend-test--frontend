@@ -1,14 +1,16 @@
 import React from "react";
 import ProductsListItem from "../components/ProductsListItem/ProductsListItem";
-import MOCK_DATA from "../constants/__mockData__";
+import { IProduct } from "../types/Components/Products";
 
-const ProductsList: React.FC = () => {
-  const { ITEMS } = MOCK_DATA;
+interface IProductsList {
+  products: IProduct[];
+}
 
+const ProductsList: React.FC<IProductsList> = ({ products }) => {
   return (
     <section className="products-list bg-white border-radius">
-      {ITEMS.map((item) => {
-        const { id, title, price, picture, free_shipping, address } = item;
+      {products.map((product) => {
+        const { id, title, price, picture, free_shipping, address } = product;
         return (
           <ProductsListItem
             id={id}
@@ -17,6 +19,7 @@ const ProductsList: React.FC = () => {
             price={price}
             free_shipping={free_shipping}
             address={address}
+            key={id}
           />
         );
       })}

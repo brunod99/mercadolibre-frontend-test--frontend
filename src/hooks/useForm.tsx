@@ -18,6 +18,8 @@ const useForm: HookUseSearchType = (initialState, validations, fn) => {
     // eslint-disable-next-line
   }, [errors]);
 
+  const clearValue = () => setValues(initialState);
+
   // Handlers
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,6 +41,7 @@ const useForm: HookUseSearchType = (initialState, validations, fn) => {
     errors,
     handleFieldEvents,
     handleSubmit,
+    clearValue,
   };
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { IProductDetail } from "../../types/Components/Products";
+import { IProduct } from "../../types/Components/Products";
 
-const ProductDetail: React.FC<IProductDetail> = ({
+const ProductDetail: React.FC<IProduct> = ({
   condition,
   sold_quantity,
   title,

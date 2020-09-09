@@ -6,11 +6,11 @@ import {
   GET_SINGLE_PRODUCT_ERROR,
   GET_SINGLE_PRODUCT_SUCCESS,
   ProductsActionTypes,
-  IInitialState,
+  IInitialProductsState,
 } from "../../../types/Redux/Products";
 
 // Initial state for products reducers
-const initialState: IInitialState = {
+const initialState: IInitialProductsState = {
   products: [],
   singleProduct: [],
   error: null,
@@ -34,7 +34,8 @@ export default function (state = initialState, action: ProductsActionTypes) {
     case GET_PRODUCTS_SUCCESS:
       return {
         ...initialState,
-        products: action.payload,
+        products: action.payload.items,
+        categories: action.payload.categories,
       };
     case GET_SINGLE_PRODUCT_CALL:
       return {

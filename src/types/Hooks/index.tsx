@@ -14,4 +14,5 @@ export type HookUseSearchType = (
   errors: HookUseSearchErrorType;
   handleFieldEvents: (e: React.FocusEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  clearValue: () => void;
 };
