@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { History } from "history";
 import { Link } from "react-router-dom";
 import MagnifyGlass from "../../assets/img/ic_Search.png";
@@ -9,7 +9,11 @@ import CONSTANTS from "../../constants";
 import useForm from "../../hooks/useForm";
 import validateSearch from "../../validations/validateSearch";
 import Message from "../../utils/message";
-import { encodeQuery } from "../../utils";
+import { encodeQuery, getUrlParams } from "../../utils";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsActions } from "../../redux/actions/Products";
+import { IInitialProductsState } from "../../types/Redux/Products";
+import { getProductsSelector } from "../../selectors/Products";
 interface ChildComponentProps {
   history: History;
 }
@@ -18,26 +22,59 @@ const Header: React.FC<ChildComponentProps> = ({ history }) => {
   // Constants
   const { HEADER_FORM_INITIAL_STATE } = CONSTANTS;
 
-  // Handlers
-  const handleSuccess = () => {
-    history.push(`/items?search=${encodeQuery(q)}`);
-  };
-
-  // Hooks
-  const { values, errors, handleFieldEvents, handleSubmit } = useForm(
-    HEADER_FORM_INITIAL_STATE,
-    validateSearch,
-    handleSuccess
+  // Redux
+  const dispatch = useDispatch();
+  const { products } = useSelector(
+    (state: { products: IInitialProductsState }) => state.products
   );
 
+  // Selector
+  const productsMemorized = getProductsSelector(products);
+
+  // Handlers
+  const handleSuccess = () => {
+    dispatch(getProductsActions(encodedValue));
+  };
+
+  // Utils
+  const searchParam = getUrlParams("search");
+
+  // Hooks
+  // - Custom hook
+  const {
+    values,
+    errors,
+    handleFieldEvents,
+    handleSubmit,
+    clearValue,
+  } = useForm(HEADER_FORM_INITIAL_STATE, validateSearch, handleSuccess);
+
+  // - Effects
   useEffect(() => {
     if (errors["q"]) {
       Message("error", "Hubo un error", errors["q"]);
     }
   }, [errors]);
 
+  useEffect(() => {
+    if (encodedValue) {
+      history.push(`/items?search=${encodedValue}`);
+      clearValue();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [productsMemorized]);
+
+  useEffect(() => {
+    if (searchParam) dispatch(getProductsActions(searchParam));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Destructuring
   const { q } = values;
+
+  const encodedValue = encodeQuery(q);
 
   return (
     <header className="header bg-primary">

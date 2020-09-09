@@ -10,8 +10,6 @@ const useForm: HookUseSearchType = (initialState, validations, fn) => {
   useEffect(() => {
     if (submitForm) {
       if (Object.keys(errors).length === 0) {
-        setValues(initialState);
-
         fn();
       }
 
@@ -19,6 +17,8 @@ const useForm: HookUseSearchType = (initialState, validations, fn) => {
     }
     // eslint-disable-next-line
   }, [errors]);
+
+  const clearValue = () => setValues(initialState);
 
   // Handlers
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,6 +41,7 @@ const useForm: HookUseSearchType = (initialState, validations, fn) => {
     errors,
     handleFieldEvents,
     handleSubmit,
+    clearValue,
   };
 };
 
