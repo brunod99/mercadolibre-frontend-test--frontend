@@ -1,6 +1,8 @@
 .product-detail {
+  margin-bottom: rem(40);
   // Main
   .product-detail__main {
+    margin-bottom: $col;
     // Img
     .product-detail__img {
       width: rem(680);

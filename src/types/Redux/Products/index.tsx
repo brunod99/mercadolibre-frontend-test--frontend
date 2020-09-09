@@ -57,7 +57,7 @@ export type ProductsActionTypes =
 // Initial State
 export interface IInitialProductsState {
   products: Array<IProduct> | [];
-  singleProduct: IProduct | [];
+  singleProduct: IProduct | null;
   categories: CategoriesType | [];
   loading: ILoadingState;
   error: IErrorState;

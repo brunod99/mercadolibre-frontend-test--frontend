@@ -1,21 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import ShoppingImg from "../../assets/img/ic_shipping.png";
 import ShoppingImg2x from "../../assets/img/ic_shipping@2x.png";
 import { IProduct } from "../../types/Components/Products";
 
-const ProductsListItem: React.FC<IProduct> = ({
-  id,
+interface IExtraProps {
+  handleClick: () => void;
+}
+
+const ProductsListItem: React.FC<IProduct & IExtraProps> = ({
   picture,
   title,
   price,
   free_shipping,
   address,
+  handleClick,
 }) => {
   return (
-    <Link
-      className="products-list-item d-flex align-items-center"
-      to={`/items/${id}`}
+    <button
+      className="products-list-item d-flex align-items-center w-100"
+      onClick={handleClick}
     >
       {/* Img */}
       <img
@@ -29,7 +32,9 @@ const ProductsListItem: React.FC<IProduct> = ({
         <div className="products-list-item__text  w-100 d-flex justify-content-between align-items-end mb-large">
           {/* Price + Shipping */}
           <div className="products-list-item__price-container d-flex align-items-end">
-            <h3 className="products-list-item__price title">${price.amount}</h3>
+            <h3 className="products-list-item__price title">
+              ${price?.amount}
+            </h3>
             {free_shipping && (
               <img
                 srcSet={`${ShoppingImg} 1x, ${ShoppingImg2x} 2x`}
@@ -46,7 +51,7 @@ const ProductsListItem: React.FC<IProduct> = ({
 
         <h2 className="products-list-item__title">{title}</h2>
       </div>
-    </Link>
+    </button>
   );
 };
 

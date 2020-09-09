@@ -12,7 +12,7 @@ import {
 // Initial state for products reducers
 const initialState: IInitialProductsState = {
   products: [],
-  singleProduct: [],
+  singleProduct: null,
   error: null,
   categories: [],
   loading: false,
@@ -20,11 +20,13 @@ const initialState: IInitialProductsState = {
 
 export default function (state = initialState, action: ProductsActionTypes) {
   switch (action.type) {
+    case GET_SINGLE_PRODUCT_CALL:
     case GET_PRODUCTS_CALL:
       return {
         ...state,
         loading: action.payload,
       };
+    case GET_SINGLE_PRODUCT_ERROR:
     case GET_PRODUCTS_ERROR:
       return {
         ...state,
@@ -37,21 +39,10 @@ export default function (state = initialState, action: ProductsActionTypes) {
         products: action.payload.items,
         categories: action.payload.categories,
       };
-    case GET_SINGLE_PRODUCT_CALL:
-      return {
-        ...state,
-        loading: action.payload,
-      };
-    case GET_SINGLE_PRODUCT_ERROR:
-      return {
-        ...state,
-        loading: initialState.loading,
-        error: action.payload,
-      };
     case GET_SINGLE_PRODUCT_SUCCESS:
       return {
         ...initialState,
-        products: action.payload,
+        singleProduct: action.payload,
       };
     default:
       return state;

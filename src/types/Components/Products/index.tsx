@@ -8,12 +8,7 @@ export interface IProduct {
     decimals: number;
   };
   free_shipping: boolean;
-  address?: {
-    state_id: string;
-    state_name: string;
-    city_id: string;
-    city_name: string;
-  };
+  address?: string;
   description?: string;
   condition?: string;
   sold_quantity?: number;
