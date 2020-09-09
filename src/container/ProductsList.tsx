@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import history from "../history";
@@ -8,7 +6,6 @@ import { getSingleProductActions } from "../redux/actions/Products";
 import { getSingleProductSelector } from "../selectors/Products";
 import { IProduct } from "../types/Components/Products";
 import { IInitialProductsState } from "../types/Redux/Products";
-import { checkObjectHasKeys } from "../utils";
 
 interface IProductsList {
   products: IProduct[];
@@ -30,7 +27,7 @@ const ProductsList: React.FC<IProductsList> = ({ products }) => {
 
   // - Effect
   useEffect(() => {
-    if (checkObjectHasKeys(singleProductMemorized, 0)) {
+    if (singleProductMemorized) {
       history.push(`/items/${selectedId}`);
     }
 

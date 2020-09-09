@@ -5,10 +5,6 @@ export const encodeQuery = (str: string) => encodeURIComponent(str);
 export const getUrlParams = (param: string): string | null =>
   new URLSearchParams(window.location.search).get(param);
 
-// Check if object has keys
-export const checkObjectHasKeys = (object: {}, amount: number): boolean =>
-  Object.keys(object).length > amount;
-
 // Detect if we need to fetch data from product single or from products
 export const detectDataFrom = (
   conditionProductSingle: string | null,

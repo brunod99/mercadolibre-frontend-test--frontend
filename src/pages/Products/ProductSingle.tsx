@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import Breadcrumb from "../../components/Breadcrumb/Breadcrumb";
 import ProductDetail from "../../components/ProductDetail/ProductDetail";
 import {
@@ -13,39 +13,26 @@ const ProductSingle: React.FC = () => {
   const { categories, singleProduct } = useSelector(
     (state: { products: IInitialProductsState }) => state.products
   );
-  const dispatch = useDispatch();
-
-  useEffect(() => {}, []);
 
   // Selector
   const singleProductMemorized = getSingleProductSelector(singleProduct);
   const categoriesMemorized = getCategoriesSelector(categories);
 
-  // Destructuring
-  const {
-    id,
-    title,
-    price,
-    picture,
-    condition,
-    free_shipping,
-    sold_quantity,
-    description,
-  } = singleProductMemorized;
-
   return (
     <main className="product-single container">
       <Breadcrumb categories={categoriesMemorized} />
-      <ProductDetail
-        id={id}
-        title={title}
-        price={price}
-        picture={picture}
-        condition={condition}
-        free_shipping={free_shipping}
-        sold_quantity={sold_quantity}
-        description={description}
-      />
+      {singleProductMemorized && (
+        <ProductDetail
+          id={singleProductMemorized.id}
+          title={singleProductMemorized.title}
+          price={singleProductMemorized.price}
+          picture={singleProductMemorized.picture}
+          condition={singleProductMemorized.condition}
+          free_shipping={singleProductMemorized.free_shipping}
+          sold_quantity={singleProductMemorized.sold_quantity}
+          description={singleProductMemorized.description}
+        />
+      )}
     </main>
   );
 };

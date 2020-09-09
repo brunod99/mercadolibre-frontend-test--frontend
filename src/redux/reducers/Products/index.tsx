@@ -12,7 +12,7 @@ import {
 // Initial state for products reducers
 const initialState: IInitialProductsState = {
   products: [],
-  singleProduct: {},
+  singleProduct: null,
   error: null,
   categories: [],
   loading: false,
