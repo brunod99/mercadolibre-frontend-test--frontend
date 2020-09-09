@@ -1,0 +1,19 @@
+.splash {
+  width: 100%;
+  height: calc(100vh);
+  left: 0;
+  top: 0;
+  position: absolute;
+  z-index: 2;
+
+  &--state-animation {
+    animation-name: slideOutUp;
+    animation-duration: 2s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+  }
+
+  img {
+    width: rem(200);
+  }
+}
