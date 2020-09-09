@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { History } from "history";
+import history from "../../history";
 import { Link } from "react-router-dom";
 import MagnifyGlass from "../../assets/img/ic_Search.png";
 import MagnifyGlass2x from "../../assets/img/ic_Search@2x.png";
@@ -9,16 +9,20 @@ import CONSTANTS from "../../constants";
 import useForm from "../../hooks/useForm";
 import validateSearch from "../../validations/validateSearch";
 import Message from "../../utils/message";
-import { encodeQuery, getUrlParams } from "../../utils";
+import {
+  detectDataFrom,
+  encodeQuery,
+  getStringFromUrlPath,
+  getUrlParams,
+} from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductsActions } from "../../redux/actions/Products";
+import {
+  getProductsActions,
+  getSingleProductActions,
+} from "../../redux/actions/Products";
 import { IInitialProductsState } from "../../types/Redux/Products";
 import { getProductsSelector } from "../../selectors/Products";
-interface IHeader {
-  history: History;
-}
-
-const Header: React.FC<IHeader> = ({ history }) => {
+const Header: React.FC = () => {
   // Constants
   const { HEADER_FORM_INITIAL_STATE } = CONSTANTS;
 
@@ -66,8 +70,14 @@ const Header: React.FC<IHeader> = ({ history }) => {
 
   // Effect on first render, checks if there is a product on URL and dispatch products
   useEffect(() => {
-    if (searchParam) dispatch(getProductsActions(searchParam));
+    const detectedData = detectDataFrom(urlId, searchParam);
 
+    if (searchParam) {
+      if (detectedData === "products")
+        dispatch(getProductsActions(searchParam));
+    }
+    if (detectedData === "product-single")
+      dispatch(getSingleProductActions(urlId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -77,6 +87,7 @@ const Header: React.FC<IHeader> = ({ history }) => {
   // Utils
   const searchParam = getUrlParams("search");
   const encodedValue = encodeQuery(search);
+  const urlId = getStringFromUrlPath("/items/");
 
   return (
     <header className="header bg-primary">

@@ -1,20 +1,24 @@
 export interface IProduct {
-  id: string;
-  picture: string;
-  title: string;
-  price: {
-    currency: string;
-    amount: number;
-    decimals: number;
-  };
-  free_shipping: boolean;
-  address?: {
-    state_id: string;
-    state_name: string;
-    city_id: string;
-    city_name: string;
-  };
-  description?: string;
-  condition?: string;
-  sold_quantity?: number;
+  id: string | undefined;
+  picture: string | undefined;
+  title: string | undefined;
+  price:
+    | {
+        currency: string | undefined;
+        amount: number | undefined;
+        decimals: number | undefined;
+      }
+    | undefined;
+  free_shipping: boolean | undefined;
+  address?:
+    | {
+        state_id: string | undefined;
+        state_name: string | undefined;
+        city_id: string | undefined;
+        city_name: string | undefined;
+      }
+    | undefined;
+  description?: string | undefined;
+  condition?: string | undefined;
+  sold_quantity?: number | undefined;
 }

@@ -20,8 +20,9 @@ export const getCategoriesSelector = createSelector(
 );
 
 // Get single product selector
-const getSingleProduct = (singleProduct: IProduct | {}): IProduct | {} =>
-  singleProduct;
+const getSingleProduct = (
+  singleProduct: Partial<IProduct>
+): Partial<IProduct> => singleProduct;
 
 export const getSingleProductSelector = createSelector(
   [getSingleProduct],
