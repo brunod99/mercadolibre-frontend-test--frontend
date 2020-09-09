@@ -10,14 +10,14 @@ const ProductDetail: React.FC<IProduct> = ({
   picture,
 }) => {
   return (
-    <section className="product-detail bg-white border-radius">
+    <section className="product-detail bg-white border-radius p-large">
       {/* Main */}
       <div className="product-detail__main d-flex justify-content-between align-items-start">
         {/* Img */}
         <img src={picture} alt={title} className="product-detail__img" />
 
         {/* Content */}
-        <div className="product-detail__main-content pt-large pr-large">
+        <div className="product-detail__main-content">
           {/* Quantity */}
           <h4 className="product-detail__quantity mb-regular">
             {condition} - {sold_quantity} vendidos
@@ -30,7 +30,8 @@ const ProductDetail: React.FC<IProduct> = ({
 
           {/* Price */}
           <h3 className="product-detail__price mb-large">
-            <span className="product-detail__price-sign">$</span> {price.amount}
+            <span className="product-detail__price-sign">$</span>
+            {price?.amount}
           </h3>
 
           {/* Cta */}
@@ -39,7 +40,7 @@ const ProductDetail: React.FC<IProduct> = ({
       </div>
 
       {/* Description */}
-      <div className="product-detail__description-container pl-large pb-large">
+      <div className="product-detail__description-container">
         <h2 className="product-detail__description-title mb-large">
           Descripción del producto
         </h2>
