@@ -14,11 +14,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductsActions } from "../../redux/actions/Products";
 import { IInitialProductsState } from "../../types/Redux/Products";
 import { getProductsSelector } from "../../selectors/Products";
-interface ChildComponentProps {
+interface IHeader {
   history: History;
 }
 
-const Header: React.FC<ChildComponentProps> = ({ history }) => {
+const Header: React.FC<IHeader> = ({ history }) => {
   // Constants
   const { HEADER_FORM_INITIAL_STATE } = CONSTANTS;
 
