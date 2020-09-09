@@ -41,7 +41,7 @@ const ProductsListItem: React.FC<IProduct> = ({
           </div>
 
           {/* City */}
-          <h6 className="products-list-item__city">{address?.state_name}</h6>
+          <h6 className="products-list-item__city">{address}</h6>
         </div>
 
         <h2 className="products-list-item__title">{title}</h2>
